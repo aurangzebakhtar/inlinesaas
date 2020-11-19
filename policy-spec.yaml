@@ -1,0 +1,650 @@
+---
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  "/saas-policy-internal/v1/policies/{ruleId}":
+    get:
+      tags:
+      - policy-mgmt-controller
+      operationId: getPolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Policy"
+    put:
+      tags:
+      - policy-mgmt-controller
+      operationId: updatePolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Policy"
+      responses:
+        '200':
+          description: default response
+    delete:
+      tags:
+      - policy-mgmt-controller
+      operationId: deletePolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+  "/saas-policy-internal/v1/policies/{ruleId}/enable":
+    put:
+      tags:
+      - policy-mgmt-controller
+      operationId: enablePolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+  "/saas-policy-internal/v1/policies/{ruleId}/disable":
+    put:
+      tags:
+      - policy-mgmt-controller
+      operationId: disablePolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+  "/saas-policy-internal/v1/policies/touch":
+    put:
+      tags:
+      - policy-mgmt-controller
+      operationId: touchPolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleName
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: default response
+  "/saas-policy-internal/v1/policies/search":
+    get:
+      tags:
+      - policy-mgmt-controller
+      operationId: searchPolicy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: filterBy
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: filterValue
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PagePolicy"
+  "/saas-policy-internal/v1/applications/search":
+    get:
+      tags:
+      - policy-mgmt-controller
+      operationId: searchApplications
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: filterBy
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: filterValue
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageApplication"
+  "/saas-policy-internal/v1/users/search":
+    get:
+      tags:
+      - policy-mgmt-controller
+      operationId: searchUser
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: filterBy
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - name: filterValue
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PageIdentity"
+  "/saas-policy-internal/v1/metadata":
+    get:
+      tags:
+      - policy-mgmt-controller
+      operationId: getMetadata
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PolicyMetadata"
+  "/saas-policy-internal/v1/policies":
+    post:
+      tags:
+      - policy-mgmt-controller
+      operationId: addPolocy
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Policy"
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Policy"
+  "/policy/v1/sync":
+    get:
+      tags:
+      - policy-sync-controller
+      operationId: getPolicyToSync
+      parameters:
+      - name: tenantid
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: start
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: default response
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/PolicySyncResponse"
+  "/saas-policy-internal/test/v1/policies/{ruleId}":
+    delete:
+      tags:
+      - policy-mgmt-test-controller
+      operationId: deletePolicy_1
+      parameters:
+      - name: tenantId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: ruleId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: default response
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        appId:
+          type: string
+        appName:
+          type: string
+        category:
+          type: string
+        risk:
+          type: string
+        activities:
+          type: array
+          items:
+            type: string
+    DataProfile:
+      type: object
+      properties:
+        name:
+          type: string
+    Identity:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+    Policy:
+      type: object
+      properties:
+        ruleId:
+          type: string
+        ruleName:
+          type: string
+        description:
+          type: string
+        systemDefined:
+          type: boolean
+        enabled:
+          type: boolean
+        synced:
+          type: boolean
+        lastUpdatedTime:
+          type: string
+          format: date-time
+        activity:
+          type: string
+        response:
+          type: string
+        applications:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Application"
+        identities:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Identity"
+        dlpProfiles:
+          type: array
+          items:
+            "$ref": "#/components/schemas/DataProfile"
+        deviceCompliantStatus:
+          type: string
+        deviceManagedStatus:
+          type: string
+    PagePolicy:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        sort:
+          "$ref": "#/components/schemas/Sort"
+        pageable:
+          "$ref": "#/components/schemas/Pageable"
+        numberOfElements:
+          type: integer
+          format: int32
+        last:
+          type: boolean
+        first:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Policy"
+        number:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    Pageable:
+      type: object
+      properties:
+        sort:
+          "$ref": "#/components/schemas/Sort"
+        pageNumber:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        unpaged:
+          type: boolean
+        paged:
+          type: boolean
+        offset:
+          type: integer
+          format: int64
+    Sort:
+      type: object
+      properties:
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+        empty:
+          type: boolean
+    PageApplication:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        sort:
+          "$ref": "#/components/schemas/Sort"
+        pageable:
+          "$ref": "#/components/schemas/Pageable"
+        numberOfElements:
+          type: integer
+          format: int32
+        last:
+          type: boolean
+        first:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Application"
+        number:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PageIdentity:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+          format: int32
+        totalElements:
+          type: integer
+          format: int64
+        sort:
+          "$ref": "#/components/schemas/Sort"
+        pageable:
+          "$ref": "#/components/schemas/Pageable"
+        numberOfElements:
+          type: integer
+          format: int32
+        last:
+          type: boolean
+        first:
+          type: boolean
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Identity"
+        number:
+          type: integer
+          format: int32
+        empty:
+          type: boolean
+    PolicyMetadata:
+      type: object
+      properties:
+        activities:
+          type: array
+          items:
+            type: string
+        responses:
+          type: array
+          items:
+            type: string
+        deviceCompliantStatusList:
+          type: array
+          items:
+            type: string
+        deviceManagedStatusList:
+          type: array
+          items:
+            type: string
+        risks:
+          type: array
+          items:
+            type: string
+        categories:
+          type: array
+          items:
+            type: string
+    AppGroup:
+      type: object
+      properties:
+        name:
+          type: string
+        apps:
+          type: array
+          items:
+            type: string
+    HipProfile:
+      type: object
+      properties:
+        name:
+          type: string
+        hipObjects:
+          type: array
+          items:
+            type: string
+    JsonNode:
+      type: object
+    PolicySyncResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          format: int32
+        currentCount:
+          type: integer
+          format: int32
+        applicationGroups:
+          type: array
+          items:
+            "$ref": "#/components/schemas/AppGroup"
+        hipProfiles:
+          type: array
+          items:
+            "$ref": "#/components/schemas/HipProfile"
+        hipObjects:
+          type: array
+          items:
+            "$ref": "#/components/schemas/JsonNode"
+        policies:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Policy"
+
